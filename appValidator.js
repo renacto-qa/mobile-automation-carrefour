@@ -1,0 +1,14 @@
+import fs from 'fs'
+import path from 'path'
+
+export function validateApp() {
+  const appPath = path.resolve('./apps/android.wdio.native.app.v2.0.0.apk')
+
+  if (!fs.existsSync(appPath)) {
+    console.error('\n❌ APK não encontrado!')
+    console.error('Coloque o arquivo dentro da pasta /apps antes de executar.\n')
+    process.exit(1)
+  }
+
+  console.log('\n✅ APK encontrado. Execução iniciando...\n')
+}

@@ -1,3 +1,8 @@
+const { validateApp } = require('./test/utils/appValidator');
+
+// 🔒 Validação antes de iniciar o WDIO
+validateApp();
+
 exports.config = {
 
     runner: 'local',

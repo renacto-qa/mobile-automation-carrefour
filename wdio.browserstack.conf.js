@@ -1,30 +1,32 @@
 exports.config = {
     runner: 'local',
 
-    user: 'renatodesouzalim_e3OUzm',
-    key: 'zmbXYCGzBmpyPYWfWrM9',
+    // 🔐 Credenciais via GitHub Secrets (ou variável de ambiente local)
+    user: process.env.BROWSERSTACK_USERNAME,
+    key: process.env.BROWSERSTACK_ACCESS_KEY,
 
     specs: [
         './test/specs/**/*.js'
     ],
 
-    // Suites organizadas
+    // 🗂 Suites organizadas
     suites: {
-    smoke: [
-        './test/specs/01-login.spec.js',
-        './test/specs/02-cadastro.spec.js'
-    ],
-    regression: [
-        './test/specs/01-login.spec.js',
-        './test/specs/02-cadastro.spec.js',
-        './test/specs/03-formularios.spec.js',
-        './test/specs/04-navegacao.spec.js'
-    ]
-},
+        smoke: [
+            './test/specs/01-login.spec.js',
+            './test/specs/02-cadastro.spec.js'
+        ],
+        regression: [
+            './test/specs/01-login.spec.js',
+            './test/specs/02-cadastro.spec.js',
+            './test/specs/03-formularios.spec.js',
+            './test/specs/04-navegacao.spec.js'
+        ]
+    },
 
-    maxInstances: 2,
+    // ⚠️ Use 1 se sua conta BrowserStack for single parallel
+    maxInstances: 1,
 
-    // Retry estratégico (anti-flaky cloud)
+    // 🔁 Retry estratégico (anti-flaky cloud)
     specFileRetries: 1,
     specFileRetriesDelay: 5,
     specFileRetriesDeferred: true,
@@ -40,7 +42,7 @@ exports.config = {
 
             'bstack:options': {
                 projectName: 'Carrefour Mobile Challenge',
-                buildName: 'Android Real Device Build',
+                buildName: `GitHub Build - ${new Date().toISOString()}`,
                 sessionName: 'Android Tests',
                 debug: true,
                 networkLogs: true,
@@ -68,7 +70,7 @@ exports.config = {
     },
 
     /**
-     * Screenshot automático em caso de falha
+     * 📸 Screenshot automático em caso de falha
      */
     afterTest: async function (test, context, { error }) {
         if (error) {
@@ -77,7 +79,7 @@ exports.config = {
     },
 
     /**
-     * Hooks opcionais para organização futura
+     * 🚀 Hooks de organização
      */
     beforeSuite: function (suite) {
         console.log(`\n🚀 Iniciando Suite: ${suite.title}`);
@@ -91,5 +93,8 @@ exports.config = {
 
     hostname: 'hub.browserstack.com',
     port: 443,
-    protocol: 'https'
+    protocol: 'https',
+
+    connectionRetryTimeout: 180000,
+    connectionRetryCount: 3
 };
