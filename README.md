@@ -1,18 +1,35 @@
 # 📱 Mobile Automation – WebdriverIO + Appium
 
-Mobile automation project developed using the official **WebdriverIO Native Demo App**, following the technical challenge requirements.
+![Pipeline Status](https://github.com/renacto-qa/mobile-automation-carrefour/actions/workflows/mobile-tests.yml/badge.svg)
+
+Mobile automation project developed using the official **WebdriverIO Native Demo App**, following a professional automation architecture pattern and CI/CD best practices.
 
 ---
 
 ## 🏗 Technologies Used
 
-- **Language:** JavaScript
-- **Test Framework:** WebdriverIO
+- **Language:** JavaScript (Node.js)
+- **Test Framework:** WebdriverIO (v9)
 - **Mobile Automation:** Appium
 - **Test Runner:** Mocha
 - **Reporting:** Allure Report
 - **Cloud Device Platform:** BrowserStack (Android Real Device)
-- **Version Control:** GitHub
+- **CI/CD:** GitHub Actions
+- **Version Control:** Git (SSH configured)
+
+---
+
+## 🏛 Enterprise-Level Setup
+
+This project includes:
+
+- 🔐 Secure SSH authentication
+- 🔑 Secrets management via GitHub Actions
+- ☁️ Real device cloud execution (BrowserStack)
+- 📊 Allure reporting with artifact upload
+- 🔄 Retry strategy for cloud stability
+- 📸 Automatic screenshots on failure
+- 🚀 Automated CI pipeline on every push to `main`
 
 ---
 
@@ -20,32 +37,33 @@ Mobile automation project developed using the official **WebdriverIO Native Demo
 
 
 mobile-automation-carrefour
+├── .github/
+│ └── workflows/
+│ └── mobile-tests.yml
 ├── test/
 │ ├── specs/
 │ └── pages/
-├── apps/
-├── wdio.conf.js (Android Local Emulator)
-├── wdio.browserstack.conf.js (Android Real Device - BrowserStack)
-├── wdio.ios.conf.js (iOS Simulator)
+├── apps/ (ignored in git)
+├── wdio.conf.js
+├── wdio.browserstack.conf.js
+├── wdio.ios.conf.js
 └── package.json
 
 
 ---
 
-## ✅ 1. Test Script Implementation
+## ✅ Test Coverage
 
-The project includes test scenarios covering the main application features:
-
-### 🔐 Authentication (Login / Sign Up)
+### 🔐 Authentication
 - Successful login
 - Invalid login validation
 - Error message validation
 - User registration
 
 ### 📄 Forms
-- Field input interactions
+- Field interaction
 - Button actions
-- Validation message checks
+- Validation checks
 
 ### 🔄 Navigation
 - Screen navigation
@@ -53,23 +71,28 @@ The project includes test scenarios covering the main application features:
 - Vertical swipe
 - Drag & Drop interaction
 
-### 🧱 Architecture
-- Page Object Model (POM) pattern implemented
-- Clear separation of responsibilities
-- Organized test suites (Smoke / Regression)
-- Retry strategy for cloud stability
+---
+
+## 🧱 Architecture Highlights
+
+- Page Object Model (POM)
+- Smoke & Regression suites
+- Spec retry strategy
+- Centralized configuration
+- Fail-fast execution strategy
+- Cloud-ready configuration
 
 ---
 
-## 🌍 2. Execution in Different Environments
+## 🌍 Execution Environments
 
 ### 🤖 Android – Local Emulator
 
 
-npm run wdio
+npm run android
 
 
-Runs the tests on a local Android emulator using Appium.
+Runs locally using Appium.
 
 ---
 
@@ -79,92 +102,50 @@ Runs the tests on a local Android emulator using Appium.
 npm run browserstack
 
 
-Configured to run on:
-
+Runs on:
 - Samsung Galaxy S23
 - Android 13
-- Real device in the cloud
-- Network logs enabled
-- Console logs enabled
-- Automatic screenshots on failure
+- Real cloud device
+- Network & console logs enabled
+- Screenshot on failure
 
 ---
 
 ### 🍏 iOS – Simulator
 
-The project is configured to run on **iOS Simulator** using the official build provided in the WebdriverIO repository.
-
-⚠️ Important:
-
-The official WebdriverIO Native Demo App states:
-
-> The iOS app can ONLY be installed on iOS simulators.  
-> There is no build available for physical iOS devices due to Apple security limitations.
-
-To run iOS tests:
-
 
 npm run ios
 
 
-Requirements:
-
-- macOS
-- Xcode installed
-- iOS Simulator configured
+⚠️ Requires macOS + Xcode.
 
 ---
 
-## 📸 3. Test Evidence & Reporting
+## 📊 Reporting
 
-The project includes:
+Allure is fully integrated.
 
-- 📊 Allure Report integration
-- 📸 Automatic screenshots on failure
-- 📜 Execution logs
-- 🌍 Environment information
-
-To generate the report:
+Generate report locally:
 
 
-allure serve allure-results
+npm run allure
 
 
-The report contains:
-
-- Test execution summary
-- Passed / Failed status
-- Execution duration
-- Failure screenshots
-- Detailed logs
+Pipeline uploads `allure-results` as artifact automatically.
 
 ---
 
-## 📸 4. Allure Report Preview
+## 🔁 Smoke vs Regression
 
-### Test Overview
-![Allure Overview](docs/allure-overview.png)
+Run specific suite:
 
-### Test Details
-![Allure Details](docs/allure-details.png)
-
----
-
-## 🔁 5. Test Execution Strategy
-
-### Smoke Suite
-
-Critical tests only:
+### Smoke
 
 
 wdio run ./wdio.browserstack.conf.js --suite smoke
 
 
----
-
-### Regression Suite
-
-Full test suite:
+### Regression
 
 
 wdio run ./wdio.browserstack.conf.js --suite regression
@@ -172,30 +153,23 @@ wdio run ./wdio.browserstack.conf.js --suite regression
 
 ---
 
-## 🔄 Retry Strategy
+## 🚀 CI/CD Pipeline
 
-Cloud execution includes anti-flaky configuration:
+GitHub Actions pipeline:
 
-- Spec file retry
-- Retry delay
-- Controlled timeouts
+- Trigger: Push to `main`
+- Node setup
+- Dependency install
+- BrowserStack execution
+- Allure artifact upload
+- Status badge integration
 
-Ensuring stability during real device execution.
+This ensures:
 
----
-
-## 🚀 6. CI/CD Ready
-
-The project structure is prepared for CI/CD integration using:
-
-- GitHub Actions or
-- GitLab CI/CD
-
-CI pipeline can:
-
-- Run tests on every commit
-- Generate Allure artifacts
-- Integrate with BrowserStack
+✔ Continuous validation  
+✔ Cloud execution  
+✔ Traceability  
+✔ Professional DevOps integration  
 
 ---
 
@@ -206,16 +180,16 @@ https://github.com/webdriverio/native-demo-app
 
 ---
 
-## 📈 Technical Highlights
+## 📈 Professional Highlights
 
 This project demonstrates:
 
-- Scalable automation architecture
-- Cross-platform configuration
-- Real device cloud execution
-- Professional reporting
-- Organized test strategy
-- CI/CD readiness
+- Mobile automation best practices
+- Cloud device execution
+- CI/CD integration
+- Secure credential handling
+- Structured logging & reporting
+- Scalable framework architecture
 
 ---
 
