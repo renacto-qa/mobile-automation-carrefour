@@ -4,11 +4,12 @@
   "description": "Desafio de Automação Mobile - Carrefour",
   "main": "index.js",
   "scripts": {
-    "test": "wdio run ./wdio.conf.js",
-    "test:local": "wdio run ./wdio.conf.js",
-    "test:log": "powershell -Command \"wdio run ./wdio.conf.js 2>&1 | Tee-Object resultado.txt\"",
-    "test:browserstack": "wdio run ./wdio.browserstack.conf.js",
-    "test:ios": "wdio run ./wdio.ios.conf.js"
+    "android": "wdio run ./wdio.android.conf.js",
+    "browserstack": "wdio run ./wdio.browserstack.conf.js",
+    "ios": "wdio run ./wdio.ios.conf.js",
+    "local": "wdio run ./wdio.conf.js",
+    "log": "powershell -Command \"wdio run ./wdio.conf.js 2>&1 | Tee-Object resultado.txt\"",
+    "allure": "allure generate allure-results --clean && allure open"
   },
   "keywords": [
     "webdriverio",
